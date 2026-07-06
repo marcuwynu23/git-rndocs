@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/marcuwynu23/git-rndocs/discussions
+    about: Ask questions and discuss ideas here first
+  - name: Security
+    url: https://github.com/marcuwynu23/git-rndocs/security/advisories
+    about: Report security vulnerabilities here

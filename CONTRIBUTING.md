@@ -22,7 +22,7 @@ Thank you for considering contributing to git-rndocs. This document outlines the
 
 ## Code of Conduct
 
-This project adheres to the [Contributor Covenant](https://www.contributor-covenant.org/). By participating, you are expected to uphold this code. Please report unacceptable behaviour to the project maintainers.
+This project adheres to the [Contributor Covenant](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behaviour to the project maintainers.
 
 ---
 
