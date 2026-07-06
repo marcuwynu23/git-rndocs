@@ -69,8 +69,8 @@ LINK_TARGET := $(LINK_DIR)/$(BINARY_NAME)
 link: build
 ifeq ($(IS_WINDOWS),1)
 	@powershell -Command "if (-not (Test-Path '$(LINK_DIR)')) { New-Item -ItemType Directory -Path '$(LINK_DIR)' -Force | Out-Null }"
-	@echo Creating symlink at $(LINK_TARGET)
-	@powershell -Command "New-Item -ItemType SymbolicLink -Path '$(LINK_TARGET)' -Target '$(abspath $(BUILD_DIR)/$(BINARY_NAME))' -Force" 2>&1
+	@echo Creating link at $(LINK_TARGET)
+	@powershell -Command "try { New-Item -ItemType SymbolicLink -Path '$(LINK_TARGET)' -Target '$(abspath $(BUILD_DIR)/$(BINARY_NAME))' -Force -ErrorAction Stop | Out-Null; Write-Host 'Symlink created' } catch { Copy-Item '$(abspath $(BUILD_DIR)/$(BINARY_NAME))' '$(LINK_TARGET)' -Force; Write-Host 'Admin required for symlink — copied instead' }" 2>&1
 else
 	@mkdir -p $(LINK_DIR)
 	@echo Creating symlink at $(LINK_TARGET)
