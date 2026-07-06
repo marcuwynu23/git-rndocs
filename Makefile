@@ -1,4 +1,4 @@
-.PHONY: all build clean test lint cover install help
+.PHONY: all build clean test lint cover install help link unlink installer-nsis deb
 
 BINARY_NAME=git-rndocs
 BUILD_DIR=./build
@@ -10,6 +10,8 @@ help:
 	@echo "Usage:"
 	@echo "  make build       - Build the binary"
 	@echo "  make install     - Install the binary (go install)"
+	@echo "  make link        - Symlink binary to C:/Bin/tools/"
+	@echo "  make unlink      - Remove symlink from C:/Bin/tools/"
 	@echo "  make test        - Run all tests"
 	@echo "  make lint        - Run golangci-lint"
 	@echo "  make cover       - Run tests with coverage"
@@ -46,6 +48,41 @@ cover:
 clean:
 	rm -rf $(BUILD_DIR) dist coverage.out coverage.html
 	@echo "Cleaned"
+
+# ------------------------
+# Symlink (Windows: C:\Bin\tools)
+# ------------------------
+
+LINK_DIR ?= C:/Bin/tools
+LINK_TARGET := $(LINK_DIR)/$(BINARY_NAME)$(if $(filter Windows_NT,$(OS)),.exe,)
+
+link: build
+ifeq ($(OS),Windows_NT)
+	@if not exist "$(LINK_DIR)" mkdir "$(LINK_DIR)"
+	@echo Creating symlink at $(LINK_TARGET)
+	@powershell -Command "New-Item -ItemType SymbolicLink -Path '$(LINK_TARGET)' -Target '$(PWD)/$(BUILD_DIR)/$(BINARY_NAME).exe' -Force" 2>&1
+else
+	@mkdir -p $(LINK_DIR)
+	@echo Creating symlink at $(LINK_TARGET)
+	@ln -sf $(PWD)/$(BUILD_DIR)/$(BINARY_NAME) $(LINK_TARGET)
+endif
+
+unlink:
+ifeq ($(OS),Windows_NT)
+	@if exist "$(LINK_TARGET)" ( \
+		echo Removing symlink $(LINK_TARGET) & \
+		powershell -Command "Remove-Item -Path '$(LINK_TARGET)' -Force" \
+	) else ( \
+		echo Symlink not found at $(LINK_TARGET) \
+	)
+else
+	@if [ -f $(LINK_TARGET) ]; then \
+		echo Removing symlink $(LINK_TARGET); \
+		rm $(LINK_TARGET); \
+	else \
+		echo Symlink not found at $(LINK_TARGET); \
+	fi
+endif
 
 # ------------------------
 # Release / Installer targets
