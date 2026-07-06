@@ -1,8 +1,16 @@
-# git-rndocs
+<div align="center">
 
-**git-rndocs** automatically generates professional release notes from Git history. Instead of manually drafting changelogs, you run a single command and get structured, categorized Markdown release notes ready for distribution.
+<img title="" src="./docs/assets/logo-2.svg" alt="" width="208">
 
-It analyzes commits, detects versions/tags, categorizes changes using Conventional Commits, and generates structured Markdown release notes.
+<a href="https://github.com/marcuwynu23/git-rndocs/releases"><img src="https://img.shields.io/github/v/release/marcuwynu23/git-rndocs" alt="GitHub release"></a>
+<a href="https://github.com/marcuwynu23/git-rndocs/blob/main/LICENSE"><img src="https://img.shields.io/github/license/marcuwynu23/git-rndocs?logo=github" alt="License"></a>
+<a href="https://github.com/marcuwynu23/git-rndocs/stargazers"><img src="https://img.shields.io/github/stars/marcuwynu23/git-rndocs?style=flat-square&logo=github" alt="Stars"></a>
+<img src="https://img.shields.io/github/go-mod/go-version/marcuwynu23/git-rndocs" alt="Go version">
+<img src="https://img.shields.io/badge/Go-%3E%3D1.22-blue" alt="Go version">
+
+<strong>Professional release notes from Git history.</strong> Go-native CLI tool. Analyzes commits, detects versions, and generates structured Markdown release notes with a single command.
+
+</div>
 
 ## Table of Contents
 

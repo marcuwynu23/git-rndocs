@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 208 208" fill="none">
+  <rect width="208" height="208" rx="40" fill="#1a1a2e"/>
+  <path d="M64 80 L144 80 L144 96 L80 96 L80 112 L136 112 L136 128 L80 128 L80 144 L144 144 L144 160 L64 160 Z" fill="#e94560"/>
+  <path d="M64 80 L80 64 L144 80 L128 96 Z" fill="#0f3460"/>
+  <circle cx="160" cy="56" r="16" fill="#e94560"/>
+  <path d="M156 52 L160 60 L164 52" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="104" y="192" font-family="monospace" font-size="14" font-weight="bold" fill="#e94560" text-anchor="middle" letter-spacing="2">git rndocs</text>
+</svg>
