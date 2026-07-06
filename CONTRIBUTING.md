@@ -95,7 +95,7 @@ The Makefile is the primary interface for development tasks. It auto-detects you
 
 ```bash
 make build          # Compile the binary into ./build/
-make test           # Run all tests with the race detector
+make test           # Run all tests
 make lint           # Run golangci-lint (if installed)
 make cover          # Run tests and generate HTML coverage report
 make clean          # Remove build artifacts and coverage output

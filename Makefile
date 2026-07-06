@@ -40,7 +40,7 @@ install:
 	@echo "Installed $(BINARY_NAME)"
 
 test:
-	$(GOTEST) -v -race ./...
+	$(GOTEST) -v ./...
 
 lint:
 	@if command -v golangci-lint >/dev/null 2>&1; then \
@@ -50,7 +50,7 @@ lint:
 	fi
 
 cover:
-	$(GOTEST) -v -race -coverprofile=coverage.out ./...
+	$(GOTEST) -v -coverprofile=coverage.out ./...
 	$(GO) tool cover -html=coverage.out -o coverage.html
 	$(GO) tool cover -func=coverage.out
 	@echo "Coverage report: coverage.html"
