@@ -1,6 +1,7 @@
 package output
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -10,6 +11,7 @@ import (
 )
 
 type Writer struct {
+	ctx           context.Context
 	outputDir     string
 	overwrite     bool
 	dryRun        bool
@@ -17,8 +19,9 @@ type Writer struct {
 	githubOpts    *github.ReleaseOptions
 }
 
-func NewWriter(outputDir string, overwrite, dryRun bool) *Writer {
+func NewWriter(ctx context.Context, outputDir string, overwrite, dryRun bool) *Writer {
 	return &Writer{
+		ctx:       ctx,
 		outputDir: outputDir,
 		overwrite: overwrite,
 		dryRun:    dryRun,
@@ -65,7 +68,7 @@ func (w *Writer) WriteRelease(release *releasenotes.Release) error {
 			return nil
 		}
 
-		ghRelease, err := github.CreateRelease(nil, w.githubOpts)
+		ghRelease, err := github.CreateRelease(w.ctx, w.githubOpts)
 		if err != nil {
 			return fmt.Errorf("failed to create GitHub release: %w", err)
 		}
