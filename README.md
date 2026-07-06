@@ -12,7 +12,7 @@
 
 <strong>Professional release notes from Git history.</strong> Go-native CLI tool. Analyzes commits, detects versions, and generates structured Markdown release notes with a single command.
 
-➡️ **[Read the full user guide →](GUIDE.md)**
+➡️ **[Read the full user guide →](USER-GUIDE.md)**
 
 </div>
 
@@ -22,7 +22,7 @@
 - [Use Cases](#use-cases)
 - [Benefits for Developers](#benefits-for-developers)
 - [Advantages Over Other Tools](#advantages-over-other-tools)
-- [User Guide](GUIDE.md)
+- [User Guide](USER-GUIDE.md)
 - [Installation](#installation)
 - [Quick Start](#quick-start)
 - [CLI Commands](#cli-commands)
@@ -123,7 +123,7 @@ Or download a binary from the [releases page](https://github.com/marcuwynu23/git
 
 ## Quick Start
 
-For a complete walkthrough including installation, configuration, CI/CD, and troubleshooting, see the **[User Guide](GUIDE.md)**.
+For a complete walkthrough including installation, configuration, CI/CD, and troubleshooting, see the **[User Guide](USER-GUIDE.md)**.
 
 ```bash
 # Initialize in your project
