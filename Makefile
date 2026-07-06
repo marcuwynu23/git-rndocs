@@ -13,7 +13,8 @@ BINARY_BASE=git-rndocs
 BINARY_NAME=$(BINARY_BASE)$(BINARY_EXT)
 BUILD_DIR=./build
 GO=go
-GOFLAGS=-ldflags="-s -w"
+VERSION ?= dev
+GOFLAGS=-ldflags="-s -w -X main.version=$(VERSION)"
 GOTEST=$(GO) test
 
 help:
