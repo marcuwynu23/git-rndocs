@@ -34,18 +34,41 @@
 
 ## What Is git-rndocs?
 
-git-rndocs is a **Git-native CLI tool** that turns your commit history into polished, human-readable release notes. It plugs directly into your Git workflow — run it as `git rndocs generate` just like any other Git subcommand or as a standalone binary.
+**git-rndocs** is a Git-native CLI tool that automatically generates professional release notes from your commit history. Instead of manually writing changelogs, you run a single command and get structured, categorized Markdown release notes — ready to ship.
 
-Under the hood it:
+### What It Does
 
-- Reads your Git tags to detect versions (SemVer, custom prefixes, annotated or lightweight)
-- Collects commits between versions
-- Parses every commit against the Conventional Commits specification
-- Categorizes changes into sections (Features, Bug Fixes, Performance, etc.)
-- Detects breaking changes, issue references, and pull request links
-- Counts contributors and generates statistics
-- Outputs beautiful Markdown files or renders them through Go templates
-- Optionally uploads directly to GitHub Releases
+- **Scans** your Git tags to detect versions (SemVer, custom prefixes, annotated or lightweight)
+- **Collects** every commit between version boundaries
+- **Parses** each commit against the [Conventional Commits](https://www.conventionalcommits.org/) specification
+- **Categorizes** changes into clear sections: Features, Bug Fixes, Performance, Documentation, Breaking Changes, and more
+- **Detects** breaking changes (`!` or `BREAKING CHANGE` footer), issue references (`#123`), and pull request links (`#42`)
+- **Counts** contributors and generates statistics (files changed, insertions, deletions)
+- **Outputs** beautiful Markdown files — either through a built-in professional template or fully customisable Go templates
+- **Publishes** directly to GitHub Releases with `git rndocs release --upload`
+
+### Why Use It?
+
+**Release notes are the public face of your work.** Yet most teams write them by hand — copying commit messages, guessing what changed, and inevitably missing things. git-rndocs solves this by making release notes a **byproduct of your existing Git workflow**.
+
+| Problem | How git-rndocs Solves It |
+|---|---|
+| Writing changelogs is tedious and error-prone | **Automated** — generated from real commit data, zero manual effort |
+| Inconsistent formatting across releases | **Standardised** — every release follows the same structure |
+| Easy to miss breaking changes | **Surfaced automatically** — from `!` or `BREAKING CHANGE` footers |
+| Contributors go uncredited | **Detected and listed** — sorted by commit count |
+| No connection between commits and issues/PRs | **Linked automatically** — `#123` and `#42` references extracted |
+| Manual copy-paste to GitHub Releases | **One command** — `git rndocs release --upload` |
+| Different teams want different formats | **Customisable** — bring your own Go templates |
+| CI pipelines need to publish notes | **CI-native** — runs in any shell, anywhere |
+
+### The Philosophy
+
+git-rndocs follows three principles:
+
+1. **Minimal setup, maximum value.** One command (`git rndocs init`) scaffolds everything. If you write Conventional Commits, you get release notes for free.
+2. **Your process stays yours.** The tool reads your Git history — it doesn't impose a workflow, a platform, or a runtime. No daemons, no servers, no databases.
+3. **Production-grade from day one.** Single static binary, zero dependencies, cross-platform, built with Go. It works the same on your laptop, a GitHub Actions runner, or a bare-metal CI server.
 
 ## Use Cases
 
