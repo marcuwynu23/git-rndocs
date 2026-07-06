@@ -100,3 +100,17 @@ jobs:
             *.deb
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # ------------------------
+      # Release Notes
+      # ------------------------
+      - name: Build git-rndocs binary
+        run: go build -ldflags="-s -w -X main.version=${GITHUB_REF_NAME#v}" -o git-rndocs .
+
+      - name: Generate release notes
+        run: ./git-rndocs generate --output docs/releases --overwrite
+
+      - name: Upload release notes to GitHub Release
+        run: gh release edit ${GITHUB_REF_NAME} --notes-file docs/releases/${GITHUB_REF_NAME}/RELEASE-NOTES.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
