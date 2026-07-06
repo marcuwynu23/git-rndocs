@@ -1,0 +1,33 @@
+# Build
+/build/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test
+coverage.out
+coverage.html
+*.test
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Go
+go.work
+go.work.sum
+
+# Dependencies
+vendor/
+
+# Generated
+docs/releases/
