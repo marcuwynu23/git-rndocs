@@ -1,6 +1,8 @@
 <div align="center">
 
-<img title="" src="./docs/assets/logo-2.svg" alt="" width="208">
+# git-rndocs
+
+<!-- <img title="" src="./docs/assets/logo-2.svg" alt="" width="208"> -->
 
 <a href="https://github.com/marcuwynu23/git-rndocs/releases"><img src="https://img.shields.io/github/v/release/marcuwynu23/git-rndocs" alt="GitHub release"></a>
 <a href="https://github.com/marcuwynu23/git-rndocs/blob/main/LICENSE"><img src="https://img.shields.io/github/license/marcuwynu23/git-rndocs?logo=github" alt="License"></a>
@@ -35,6 +37,7 @@
 git-rndocs is a **Git-native CLI tool** that turns your commit history into polished, human-readable release notes. It plugs directly into your Git workflow — run it as `git rndocs generate` just like any other Git subcommand or as a standalone binary.
 
 Under the hood it:
+
 - Reads your Git tags to detect versions (SemVer, custom prefixes, annotated or lightweight)
 - Collects commits between versions
 - Parses every commit against the Conventional Commits specification
@@ -46,14 +49,14 @@ Under the hood it:
 
 ## Use Cases
 
-| Scenario | How git-rndocs Helps |
-|---|---|
+| Scenario                    | How git-rndocs Helps                                                                   |
+| --------------------------- | -------------------------------------------------------------------------------------- |
 | **Open-source maintainers** | Automate changelog generation for every release. Never forget to credit a contributor. |
-| **CI/CD pipelines** | Run `git rndocs generate` on every tag push. Publish release notes automatically. |
-| **Monorepo teams** | Generate release notes per component or per version range. |
-| **Release managers** | Preview notes before publishing with `--dry-run`. Control exactly what gets included. |
-| **SaaS / internal tools** | Keep stakeholders informed with professional release notes on every deploy. |
-| **Compliance / auditing** | Maintain a permanent, structured record of every change per release. |
+| **CI/CD pipelines**         | Run `git rndocs generate` on every tag push. Publish release notes automatically.      |
+| **Monorepo teams**          | Generate release notes per component or per version range.                             |
+| **Release managers**        | Preview notes before publishing with `--dry-run`. Control exactly what gets included.  |
+| **SaaS / internal tools**   | Keep stakeholders informed with professional release notes on every deploy.            |
+| **Compliance / auditing**   | Maintain a permanent, structured record of every change per release.                   |
 
 ## Benefits for Developers
 
@@ -68,19 +71,19 @@ Under the hood it:
 
 ## Advantages Over Other Tools
 
-| Aspect | git-rndocs | git-cliff | auto-changelog | semantic-release | handwritten CHANGELOG.md |
-|---|---|---|---|---|---|
-| **Setup time** | ~10 seconds (`git rndocs init`) | Minutes (config file required) | Minutes (npm install + config) | Hours (full pipeline setup) | None, but ongoing effort |
-| **Conventional Commits** | Full parser with scopes, footers, breaking changes | Basic regex matching | Basic keyword matching | Limited to bump logic | N/A (manual) |
-| **GitHub Releases** | Built-in (`--upload` via CLI or API) | Plugin required | Not built-in | Native | Manual copy-paste |
-| **Templates** | Go templates (3 built-in + custom) | Tera templates | Handlebars | Fixed format | Any format but manual |
-| **Contributor detection** | Automatic, sorted by commit count | Basic | Not included | Not included | Manual |
-| **Statistics** | Files changed, insertions/deletions, category counts | Limited | Not included | Not included | Not included |
-| **Monorepo support** | `--from` / `--to` ranges + custom config | Yes | Limited | Per-package setup | Manual |
-| **Dry-run / preview** | `--dry-run` and `preview` subcommand | `--dry-run` | `--dry-run` | Not available | N/A |
-| **Commit filtering** | Include/exclude by type, group unknown commits | Regex-based filtering | Type-based filtering | Not available | N/A |
-| **Release automation** | `release` subcommand with draft/prerelease | Git hooks | Not built-in | Full pipeline | None |
-| **Runtime** | Single static binary, no deps | Rust binary | Requires Node.js/npm | Requires Node.js | None |
+| Aspect                    | git-rndocs                                           | git-cliff                      | auto-changelog                 | semantic-release            | handwritten CHANGELOG.md |
+| ------------------------- | ---------------------------------------------------- | ------------------------------ | ------------------------------ | --------------------------- | ------------------------ |
+| **Setup time**            | ~10 seconds (`git rndocs init`)                      | Minutes (config file required) | Minutes (npm install + config) | Hours (full pipeline setup) | None, but ongoing effort |
+| **Conventional Commits**  | Full parser with scopes, footers, breaking changes   | Basic regex matching           | Basic keyword matching         | Limited to bump logic       | N/A (manual)             |
+| **GitHub Releases**       | Built-in (`--upload` via CLI or API)                 | Plugin required                | Not built-in                   | Native                      | Manual copy-paste        |
+| **Templates**             | Go templates (3 built-in + custom)                   | Tera templates                 | Handlebars                     | Fixed format                | Any format but manual    |
+| **Contributor detection** | Automatic, sorted by commit count                    | Basic                          | Not included                   | Not included                | Manual                   |
+| **Statistics**            | Files changed, insertions/deletions, category counts | Limited                        | Not included                   | Not included                | Not included             |
+| **Monorepo support**      | `--from` / `--to` ranges + custom config             | Yes                            | Limited                        | Per-package setup           | Manual                   |
+| **Dry-run / preview**     | `--dry-run` and `preview` subcommand                 | `--dry-run`                    | `--dry-run`                    | Not available               | N/A                      |
+| **Commit filtering**      | Include/exclude by type, group unknown commits       | Regex-based filtering          | Type-based filtering           | Not available               | N/A                      |
+| **Release automation**    | `release` subcommand with draft/prerelease           | Git hooks                      | Not built-in                   | Full pipeline               | None                     |
+| **Runtime**               | Single static binary, no deps                        | Rust binary                    | Requires Node.js/npm           | Requires Node.js            | None                     |
 
 If you already write Conventional Commits, git-rndocs gives you release notes for free — no extra tooling, no configuration rabbit holes, no runtime dependencies.
 
@@ -197,6 +200,7 @@ statistics: true
 ## Templates
 
 Built-in templates:
+
 - `default` - Professional Markdown release notes
 - `github` - GitHub-flavored release notes
 - `minimal` - Minimal release notes
@@ -211,17 +215,20 @@ Custom templates use Go templates:
 {{ .Version }}
 
 {{ range .Sections }}
+
 ## {{ .Title }}
 
 {{ range .Commits }}
+
 - {{ .Header }}
-{{ end }}
-{{ end }}
+  {{ end }}
+  {{ end }}
 ```
 
 ## Conventional Commits
 
 Recognized commit types:
+
 - `feat` - Features
 - `fix` - Bug Fixes
 - `perf` - Performance
