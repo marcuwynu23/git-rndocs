@@ -50,7 +50,8 @@ jobs:
         env:
           GOOS: windows
           GOARCH: amd64
-        run: go build -ldflags="-s -w" -o dist/${{ env.NAME }}-windows-amd64.exe .
+          VERSION: ${GITHUB_REF_NAME#v}
+        run: go build -ldflags="-s -w -X main.version=${VERSION}" -o dist/${{ env.NAME }}-windows-amd64.exe .
 
       - name: Build NSIS Installer
         run: make installer-nsis NSIS_VERSION=${GITHUB_REF_NAME#v}
@@ -62,7 +63,8 @@ jobs:
         env:
           GOOS: linux
           GOARCH: amd64
-        run: go build -ldflags="-s -w" -o dist/${{ env.NAME }}-linux-amd64 .
+          VERSION: ${GITHUB_REF_NAME#v}
+        run: go build -ldflags="-s -w -X main.version=${VERSION}" -o dist/${{ env.NAME }}-linux-amd64 .
 
       - name: Build Debian Package
         run: make deb DEB_VERSION=${GITHUB_REF_NAME#v}
@@ -74,13 +76,15 @@ jobs:
         env:
           GOOS: darwin
           GOARCH: amd64
-        run: go build -ldflags="-s -w" -o dist/${{ env.NAME }}-darwin-amd64 .
+          VERSION: ${GITHUB_REF_NAME#v}
+        run: go build -ldflags="-s -w -X main.version=${VERSION}" -o dist/${{ env.NAME }}-darwin-amd64 .
 
       - name: Build for macOS (Apple Silicon)
         env:
           GOOS: darwin
           GOARCH: arm64
-        run: go build -ldflags="-s -w" -o dist/${{ env.NAME }}-darwin-arm64 .
+          VERSION: ${GITHUB_REF_NAME#v}
+        run: go build -ldflags="-s -w -X main.version=${VERSION}" -o dist/${{ env.NAME }}-darwin-arm64 .
 
       # ------------------------
       # Debug
