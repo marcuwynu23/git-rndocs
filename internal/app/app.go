@@ -63,7 +63,7 @@ func (a *App) Generate(ctx context.Context, opts *config.GenerateOptions) error 
 		return fmt.Errorf("failed to generate release notes: %w", err)
 	}
 
-	writer := output.NewWriter(a.config.Output, opts.Overwrite, opts.DryRun)
+	writer := output.NewWriter(ctx, a.config.Output, opts.Overwrite, opts.DryRun)
 	if err := writer.WriteReleases(result); err != nil {
 		return fmt.Errorf("failed to write releases: %w", err)
 	}
@@ -131,7 +131,7 @@ func (a *App) Release(ctx context.Context, opts *config.GenerateOptions, release
 		return fmt.Errorf("failed to generate release notes: %w", err)
 	}
 
-	writer := output.NewWriter(a.config.Output, opts.Overwrite, opts.DryRun)
+	writer := output.NewWriter(ctx, a.config.Output, opts.Overwrite, opts.DryRun)
 	if releaseOpts != nil {
 		writer.SetGitHubOptions(releaseOpts)
 	}
