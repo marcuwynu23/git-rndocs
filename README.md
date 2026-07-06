@@ -354,4 +354,6 @@ The project follows Clean Architecture principles:
 
 ## License
 
-MIT
+Apache 2.0 — you are free to use, modify, distribute, and sublicense this software. In short: do what you want, just don't sue us and keep the original copyright notice.
+
+Happy Coding! 🚀
