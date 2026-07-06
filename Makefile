@@ -68,7 +68,7 @@ LINK_TARGET := $(LINK_DIR)/$(BINARY_NAME)
 
 link: build
 ifeq ($(IS_WINDOWS),1)
-	@if not exist "$(LINK_DIR)" mkdir "$(LINK_DIR)"
+	@powershell -Command "if (-not (Test-Path '$(LINK_DIR)')) { New-Item -ItemType Directory -Path '$(LINK_DIR)' -Force | Out-Null }"
 	@echo Creating symlink at $(LINK_TARGET)
 	@powershell -Command "New-Item -ItemType SymbolicLink -Path '$(LINK_TARGET)' -Target '$(abspath $(BUILD_DIR)/$(BINARY_NAME))' -Force" 2>&1
 else
@@ -79,12 +79,7 @@ endif
 
 unlink:
 ifeq ($(IS_WINDOWS),1)
-	@if exist "$(LINK_TARGET)" ( \
-		echo Removing symlink $(LINK_TARGET) & \
-		powershell -Command "Remove-Item -Path '$(LINK_TARGET)' -Force" \
-	) else ( \
-		echo Symlink not found at $(LINK_TARGET) \
-	)
+	@powershell -Command "if (Test-Path '$(LINK_TARGET)') { Remove-Item -Path '$(LINK_TARGET)' -Force; Write-Host 'Removed symlink at $(LINK_TARGET)' } else { Write-Host 'Symlink not found at $(LINK_TARGET)' }"
 else
 	@if [ -f $(LINK_TARGET) ]; then \
 		echo Removing symlink $(LINK_TARGET); \
