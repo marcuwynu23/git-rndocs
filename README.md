@@ -1,8 +1,62 @@
 # git-rndocs
 
-**git-rndocs** automatically generates professional release notes from Git history.
+**git-rndocs** automatically generates professional release notes from Git history. Instead of manually drafting changelogs, you run a single command and get structured, categorized Markdown release notes ready for distribution.
 
 It analyzes commits, detects versions/tags, categorizes changes using Conventional Commits, and generates structured Markdown release notes.
+
+## What Is git-rndocs?
+
+git-rndocs is a **Git-native CLI tool** that turns your commit history into polished, human-readable release notes. It plugs directly into your Git workflow — run it as `git rndocs generate` just like any other Git subcommand or as a standalone binary.
+
+Under the hood it:
+- Reads your Git tags to detect versions (SemVer, custom prefixes, annotated or lightweight)
+- Collects commits between versions
+- Parses every commit against the Conventional Commits specification
+- Categorizes changes into sections (Features, Bug Fixes, Performance, etc.)
+- Detects breaking changes, issue references, and pull request links
+- Counts contributors and generates statistics
+- Outputs beautiful Markdown files or renders them through Go templates
+- Optionally uploads directly to GitHub Releases
+
+## Use Cases
+
+| Scenario | How git-rndocs Helps |
+|---|---|
+| **Open-source maintainers** | Automate changelog generation for every release. Never forget to credit a contributor. |
+| **CI/CD pipelines** | Run `git rndocs generate` on every tag push. Publish release notes automatically. |
+| **Monorepo teams** | Generate release notes per component or per version range. |
+| **Release managers** | Preview notes before publishing with `--dry-run`. Control exactly what gets included. |
+| **SaaS / internal tools** | Keep stakeholders informed with professional release notes on every deploy. |
+| **Compliance / auditing** | Maintain a permanent, structured record of every change per release. |
+
+## Benefits for Developers
+
+- **Zero manual effort** — one command replaces hours of copy-pasting commit messages
+- **Consistent formatting** — every release note follows the same structure, every time
+- **Less context switching** — stay in the terminal; no need to open a docs tool
+- **Catch missing context** — breaking changes and issue references are surfaced automatically
+- **CI-native** — runs in GitHub Actions, GitLab CI, CircleCI, Jenkins, or any shell
+- **Contributor recognition** — automatically lists and sorts contributors by commit count
+- **GitHub-ready** — uploads directly as a GitHub Release with `git rndocs release --upload`
+- **Fully customizable** — templates, config, include/exclude filters — adapt it to your team's style
+
+## Advantages Over Other Tools
+
+| Aspect | git-rndocs | git-cliff | semantic-release | handwritten CHANGELOG.md |
+|---|---|---|---|---|
+| **Setup time** | ~10 seconds (`git rndocs init`) | Minutes (config file required) | Hours (full pipeline setup) | None, but ongoing effort |
+| **Conventional Commits** | Full parser with scopes, footers, breaking changes | Basic regex matching | Limited to bump logic | N/A (manual) |
+| **GitHub Releases** | Built-in (`--upload` via CLI or API) | Plugin required | Native | Manual copy-paste |
+| **Templates** | Go templates (3 built-in + custom) | Tera templates | Fixed format | Any format but manual |
+| **Contributor detection** | Automatic, sorted by commit count | Basic | Not included | Manual |
+| **Statistics** | Files changed, insertions/deletions, category counts | Limited | Not included | Not included |
+| **Monorepo support** | `--from` / `--to` ranges + custom config | Yes | Per-package setup | Manual |
+| **Dry-run / preview** | `--dry-run` and `preview` subcommand | `--dry-run` | Not available | N/A |
+| **Commit filtering** | Include/exclude by type, group unknown commits | Regex-based filtering | Not available | N/A |
+| **Release automation** | `release` subcommand with draft/prerelease | Git hooks | Full pipeline | None |
+| **Go binary** | Single static binary, no runtime deps | Rust binary | Requires Node.js | None |
+
+If you already write Conventional Commits, git-rndocs gives you release notes for free — no extra tooling, no configuration rabbit holes, no runtime dependencies.
 
 ## Installation
 
