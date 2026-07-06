@@ -61,7 +61,7 @@ Under the hood it:
 ## Advantages Over Other Tools
 
 | Aspect | git-rndocs | git-cliff | auto-changelog | semantic-release | handwritten CHANGELOG.md |
-|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|
 | **Setup time** | ~10 seconds (`git rndocs init`) | Minutes (config file required) | Minutes (npm install + config) | Hours (full pipeline setup) | None, but ongoing effort |
 | **Conventional Commits** | Full parser with scopes, footers, breaking changes | Basic regex matching | Basic keyword matching | Limited to bump logic | N/A (manual) |
 | **GitHub Releases** | Built-in (`--upload` via CLI or API) | Plugin required | Not built-in | Native | Manual copy-paste |
