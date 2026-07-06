@@ -4,6 +4,24 @@
 
 It analyzes commits, detects versions/tags, categorizes changes using Conventional Commits, and generates structured Markdown release notes.
 
+## Table of Contents
+
+- [What Is git-rndocs?](#what-is-git-rndocs)
+- [Use Cases](#use-cases)
+- [Benefits for Developers](#benefits-for-developers)
+- [Advantages Over Other Tools](#advantages-over-other-tools)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [CLI Commands](#cli-commands)
+- [Configuration](#configuration)
+- [Templates](#templates)
+- [Conventional Commits](#conventional-commits)
+- [Output Structure](#output-structure)
+- [Example Output](#example-output)
+- [CI/CD Integration](#cicd-integration)
+- [Development](#development)
+- [Architecture](#architecture)
+
 ## What Is git-rndocs?
 
 git-rndocs is a **Git-native CLI tool** that turns your commit history into polished, human-readable release notes. It plugs directly into your Git workflow — run it as `git rndocs generate` just like any other Git subcommand or as a standalone binary.
