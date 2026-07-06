@@ -7,6 +7,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var Version = "dev"
+
 var rootCmd = &cobra.Command{
 	Use:   "git-rndocs",
 	Short: "Generate professional release notes from Git history",
@@ -19,7 +21,8 @@ structured Markdown release notes following Conventional Commits standards.`,
 	},
 }
 
-func Execute() {
+func Execute(version string) {
+	Version = version
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
@@ -33,4 +36,5 @@ func init() {
 	rootCmd.AddCommand(initCmd)
 	rootCmd.AddCommand(configCmd)
 	rootCmd.AddCommand(releaseCmd)
+	rootCmd.AddCommand(versionCmd)
 }
