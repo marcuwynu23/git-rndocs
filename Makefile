@@ -44,5 +44,59 @@ cover:
 	@echo "Coverage report: coverage.html"
 
 clean:
-	rm -rf $(BUILD_DIR) coverage.out coverage.html
+	rm -rf $(BUILD_DIR) dist coverage.out coverage.html
 	@echo "Cleaned"
+
+# ------------------------
+# Release / Installer targets
+# ------------------------
+
+BINARY_NAME ?= git-rndocs
+NSIS_VERSION ?= 0.0.0
+DEB_VERSION ?= 0.0.0
+
+dist/$(BINARY_NAME)-windows-amd64.exe:
+	GOOS=windows GOARCH=amd64 $(GO) build $(GOFLAGS) -o $@ .
+
+dist/$(BINARY_NAME)-linux-amd64:
+	GOOS=linux GOARCH=amd64 $(GO) build $(GOFLAGS) -o $@ .
+
+dist/$(BINARY_NAME)-darwin-amd64:
+	GOOS=darwin GOARCH=amd64 $(GO) build $(GOFLAGS) -o $@ .
+
+dist/$(BINARY_NAME)-darwin-arm64:
+	GOOS=darwin GOARCH=arm64 $(GO) build $(GOFLAGS) -o $@ .
+
+dist/$(BINARY_NAME)-setup.exe: dist/$(BINARY_NAME)-windows-amd64.exe
+	@mkdir -p dist
+	@echo "Creating NSIS installer for version $(NSIS_VERSION)..."
+	@makensis -DVERSION=$(NSIS_VERSION) -DBINARY=dist/$(BINARY_NAME)-windows-amd64.exe -DOUTFILE="$@" installer.nsi 2>/dev/null || \
+	 echo "NSIS not installed — copying binary as fallback"; cp $< $@
+
+installer-nsis: dist/$(BINARY_NAME)-windows-amd64.exe
+	@mkdir -p dist
+	@echo "Creating NSIS installer for version $(NSIS_VERSION)..."
+	@if command -v makensis >/dev/null 2>&1; then \
+		makensis -DVERSION=$(NSIS_VERSION) \
+			-DBINARY=dist/$(BINARY_NAME)-windows-amd64.exe \
+			-DOUTFILE="dist/$(BINARY_NAME)-setup.exe" \
+			installer.nsi; \
+	else \
+		echo "NSIS not installed — skipping installer"; \
+		cp dist/$(BINARY_NAME)-windows-amd64.exe dist/$(BINARY_NAME)-setup.exe; \
+	fi
+
+deb: dist/$(BINARY_NAME)-linux-amd64
+	@echo "Building .deb package for version $(DEB_VERSION)..."
+	@if command -v fpm >/dev/null 2>&1; then \
+		fpm -s dir -t deb \
+			-n $(BINARY_NAME) \
+			-v $(DEB_VERSION) \
+			--description "Professional release notes from Git history" \
+			--license "Apache-2.0" \
+			--url "https://github.com/marcuwynu23/git-rndocs" \
+			--maintainer "marcuwynu23" \
+			dist/$(BINARY_NAME)-linux-amd64=/usr/local/bin/$(BINARY_NAME); \
+	else \
+		echo "fpm not installed — skipping .deb"; \
+	fi
