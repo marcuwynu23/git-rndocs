@@ -157,7 +157,7 @@ func (g *Generator) generateSingle(ctx context.Context, from, to string, opts *c
 	}
 
 	var version string
-	if from == "" {
+	if from == "" && to == "HEAD" {
 		version = "initial"
 	} else if to == "HEAD" {
 		version = fmt.Sprintf("%s-next", from)
