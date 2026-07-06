@@ -21,5 +21,5 @@
 ## Contributors
 
 {{ range .Contributors }}
-- {{ .Name }}
+- {{ .Name }} ({{ .Count }} commits)
 {{ end }}{{ end }}
