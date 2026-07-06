@@ -112,7 +112,7 @@ dist/$(BINARY_BASE)-darwin-arm64:
 dist/$(BINARY_BASE)-setup.exe: dist/$(BINARY_BASE)-windows-amd64.exe
 	@mkdir -p dist
 	@echo "Creating NSIS installer for version $(NSIS_VERSION)..."
-	@makensis -DVERSION=$(NSIS_VERSION) -DBINARY=dist/$(BINARY_BASE)-windows-amd64.exe -DOUTFILE="$@" installers/installer.nsi 2>/dev/null || \
+	@makensis -DVERSION=$(NSIS_VERSION) -DBINARY="$(abspath $<)" -DOUTFILE="$@" installers/installer.nsi 2>/dev/null || \
 	 echo "NSIS not installed — copying binary as fallback"; cp $< $@
 
 installer-nsis: dist/$(BINARY_BASE)-windows-amd64.exe
@@ -120,7 +120,7 @@ installer-nsis: dist/$(BINARY_BASE)-windows-amd64.exe
 	@echo "Creating NSIS installer for version $(NSIS_VERSION)..."
 	@if command -v makensis >/dev/null 2>&1; then \
 		makensis -DVERSION=$(NSIS_VERSION) \
-			-DBINARY=dist/$(BINARY_BASE)-windows-amd64.exe \
+			-DBINARY="$(abspath dist/$(BINARY_BASE)-windows-amd64.exe)" \
 			-DOUTFILE="dist/$(BINARY_BASE)-setup.exe" \
 			installers/installer.nsi; \
 	else \
