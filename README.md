@@ -12,6 +12,8 @@
 
 <strong>Professional release notes from Git history.</strong> Go-native CLI tool. Analyzes commits, detects versions, and generates structured Markdown release notes with a single command.
 
+➡️ **[Read the full user guide →](GUIDE.md)**
+
 </div>
 
 ## Table of Contents
@@ -20,6 +22,7 @@
 - [Use Cases](#use-cases)
 - [Benefits for Developers](#benefits-for-developers)
 - [Advantages Over Other Tools](#advantages-over-other-tools)
+- [User Guide](GUIDE.md)
 - [Installation](#installation)
 - [Quick Start](#quick-start)
 - [CLI Commands](#cli-commands)
@@ -119,6 +122,8 @@ go install github.com/marcuwynu23/git-rndocs@latest
 Or download a binary from the [releases page](https://github.com/marcuwynu23/git-rndocs/releases).
 
 ## Quick Start
+
+For a complete walkthrough including installation, configuration, CI/CD, and troubleshooting, see the **[User Guide](GUIDE.md)**.
 
 ```bash
 # Initialize in your project
