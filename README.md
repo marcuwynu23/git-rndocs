@@ -60,19 +60,19 @@ Under the hood it:
 
 ## Advantages Over Other Tools
 
-| Aspect | git-rndocs | git-cliff | semantic-release | handwritten CHANGELOG.md |
-|---|---|---|---|---|
-| **Setup time** | ~10 seconds (`git rndocs init`) | Minutes (config file required) | Hours (full pipeline setup) | None, but ongoing effort |
-| **Conventional Commits** | Full parser with scopes, footers, breaking changes | Basic regex matching | Limited to bump logic | N/A (manual) |
-| **GitHub Releases** | Built-in (`--upload` via CLI or API) | Plugin required | Native | Manual copy-paste |
-| **Templates** | Go templates (3 built-in + custom) | Tera templates | Fixed format | Any format but manual |
-| **Contributor detection** | Automatic, sorted by commit count | Basic | Not included | Manual |
-| **Statistics** | Files changed, insertions/deletions, category counts | Limited | Not included | Not included |
-| **Monorepo support** | `--from` / `--to` ranges + custom config | Yes | Per-package setup | Manual |
-| **Dry-run / preview** | `--dry-run` and `preview` subcommand | `--dry-run` | Not available | N/A |
-| **Commit filtering** | Include/exclude by type, group unknown commits | Regex-based filtering | Not available | N/A |
-| **Release automation** | `release` subcommand with draft/prerelease | Git hooks | Full pipeline | None |
-| **Go binary** | Single static binary, no runtime deps | Rust binary | Requires Node.js | None |
+| Aspect | git-rndocs | git-cliff | auto-changelog | semantic-release | handwritten CHANGELOG.md |
+|---|---|---|---|---|---|---|
+| **Setup time** | ~10 seconds (`git rndocs init`) | Minutes (config file required) | Minutes (npm install + config) | Hours (full pipeline setup) | None, but ongoing effort |
+| **Conventional Commits** | Full parser with scopes, footers, breaking changes | Basic regex matching | Basic keyword matching | Limited to bump logic | N/A (manual) |
+| **GitHub Releases** | Built-in (`--upload` via CLI or API) | Plugin required | Not built-in | Native | Manual copy-paste |
+| **Templates** | Go templates (3 built-in + custom) | Tera templates | Handlebars | Fixed format | Any format but manual |
+| **Contributor detection** | Automatic, sorted by commit count | Basic | Not included | Not included | Manual |
+| **Statistics** | Files changed, insertions/deletions, category counts | Limited | Not included | Not included | Not included |
+| **Monorepo support** | `--from` / `--to` ranges + custom config | Yes | Limited | Per-package setup | Manual |
+| **Dry-run / preview** | `--dry-run` and `preview` subcommand | `--dry-run` | `--dry-run` | Not available | N/A |
+| **Commit filtering** | Include/exclude by type, group unknown commits | Regex-based filtering | Type-based filtering | Not available | N/A |
+| **Release automation** | `release` subcommand with draft/prerelease | Git hooks | Not built-in | Full pipeline | None |
+| **Runtime** | Single static binary, no deps | Rust binary | Requires Node.js/npm | Requires Node.js | None |
 
 If you already write Conventional Commits, git-rndocs gives you release notes for free — no extra tooling, no configuration rabbit holes, no runtime dependencies.
 
