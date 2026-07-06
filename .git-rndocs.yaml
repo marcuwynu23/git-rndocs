@@ -1,0 +1,21 @@
+output: docs/releases
+template: default
+release_name: "Version {{ .Version }}"
+include:
+  - feat
+  - fix
+  - perf
+  - docs
+  - refactor
+  - style
+  - build
+  - ci
+  - test
+  - chore
+  - revert
+exclude: []
+group_unknown: true
+github:
+  upload: false
+contributors: true
+statistics: true
