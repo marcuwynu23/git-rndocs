@@ -1,0 +1,70 @@
+version: 2
+
+project_name: git-rndocs
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X main.version={{ .Version }} -X main.commit={{ .Commit }} -X main.date={{ .Date }}
+
+archives:
+  - format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - LICENSE
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  version_template: "{{ .Tag }}-next"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+      - "merge conflict"
+      - Merge pull request
+      - Merge branch
+
+brews:
+  - repository:
+      owner: marcuwynu23
+      name: homebrew-tap
+    homepage: "https://github.com/marcuwynu23/git-rndocs"
+    description: "Generate professional release notes from Git history"
+
+nfpms:
+  - package_name: git-rndocs
+    maintainer: "Marcuwynu23"
+    description: "Generate professional release notes from Git history"
+    formats:
+      - deb
+      - rpm
+      - archlinux
+
+release:
+  github:
+    owner: marcuwynu23
+    name: git-rndocs
+  draft: true
