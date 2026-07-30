@@ -70,14 +70,31 @@ func (g *Generator) GenerateAll(ctx context.Context, opts *config.GenerateOption
 
 	if opts.Latest {
 		latest := tags[len(tags)-1]
-		from := latest.Name
-		to := "HEAD"
-		if !opts.All {
-			from = ""
+		from := ""
+		to := latest.Name
+		if len(tags) > 1 && !opts.All {
+			from = tags[len(tags)-2].Name
 		}
 		release, err := g.generateSingle(ctx, from, to, opts)
 		if err != nil {
 			return nil, err
+		}
+		return &GenerateResult{Releases: []*Release{release}}, nil
+	}
+
+	if opts.Version != "" {
+		from := ""
+		for i, t := range tags {
+			if t.Name == opts.Version {
+				if i > 0 {
+					from = tags[i-1].Name
+				}
+				break
+			}
+		}
+		release, err := g.generateSingle(ctx, from, opts.Version, opts)
+		if err != nil {
+			return nil, fmt.Errorf("failed to generate for %s: %w", opts.Version, err)
 		}
 		return &GenerateResult{Releases: []*Release{release}}, nil
 	}
@@ -97,7 +114,7 @@ func (g *Generator) GenerateAll(ctx context.Context, opts *config.GenerateOption
 	}
 
 	lastTag := tags[len(tags)-1].Name
-	if !opts.All && opts.Version == "" {
+	if !opts.All {
 		release, err := g.generateSingle(ctx, lastTag, "HEAD", opts)
 		if err != nil {
 			return nil, err
