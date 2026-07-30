@@ -51,13 +51,13 @@ lint:
 	fi
 
 cover:
-	$(GOTEST) -v -coverprofile=coverage.out ./...
-	$(GO) tool cover -html=coverage.out -o coverage.html
-	$(GO) tool cover -func=coverage.out
+	$(GOTEST) -v -coverprofile=coverage.txt ./...
+	$(GO) tool cover -html=coverage.txt -o coverage.html
+	$(GO) tool cover -func=coverage.txt
 	@echo "Coverage report: coverage.html"
 
 clean:
-	rm -rf $(BUILD_DIR) dist coverage.out coverage.html
+	rm -rf $(BUILD_DIR) dist coverage.txt coverage.html
 	@echo "Cleaned"
 
 # ------------------------

@@ -8,7 +8,9 @@
 
 # Test
 coverage.out
+coverage.txt
 coverage.html
+*.out
 *.test
 
 # IDE
