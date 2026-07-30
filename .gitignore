@@ -10,6 +10,7 @@
 coverage.out
 coverage.txt
 coverage.html
+*coverage.txt
 *.out
 *.test
 
