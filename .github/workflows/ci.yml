@@ -28,9 +28,9 @@ jobs:
         run: go build -v ./...
 
       - name: Test
-        run: mkdir -p build && go test -v -race -coverprofile=build/coverage.txt $(go list ./...)
+        run: mkdir -p build && go test -v -race -coverprofile=build/cov ./...
 
       - name: Upload coverage
         uses: codecov/codecov-action@v5
         with:
-          file: ./build/coverage.txt
+          file: ./build/cov
